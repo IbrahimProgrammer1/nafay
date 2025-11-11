@@ -4,8 +4,8 @@ import { verifyPassword } from '@/../lib/auth';
 import { createSession } from '@/../lib/auth.server';
 import { z } from 'zod';
 
-// Add this line to mark the route as dynamic
 export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -37,7 +37,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
     }
 
-    // Create the session using the server-only function
     await createSession(user.id, user.role);
 
     return NextResponse.json({
