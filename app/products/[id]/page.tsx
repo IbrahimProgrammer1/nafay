@@ -5,6 +5,8 @@ import { ShieldCheck, Truck, RotateCw } from 'lucide-react';
 import { formatPrice } from '@/../lib/utils';
 import AddToCartButton from '@/../components/AddToCartButton';
 
+export const dynamic = 'force-dynamic';
+
 type ProductPageProps = {
   params: {
     id: string;
