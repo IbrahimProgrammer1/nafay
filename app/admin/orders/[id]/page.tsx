@@ -5,6 +5,8 @@ import { formatPrice } from '@/../lib/utils';
 import { Home, Phone, Mail, User } from 'lucide-react';
 import UpdateOrderStatusForm from './_components/UpdateOrderStatusForm';
 
+export const dynamic = 'force-dynamic';
+
 export default async function OrderDetailPage({ params }: { params: { id: string } }) {
   const order = await prisma.order.findUnique({
     where: { id: params.id },

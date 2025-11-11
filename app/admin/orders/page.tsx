@@ -5,6 +5,8 @@ import { Eye, Truck } from 'lucide-react';
 import OrderStatusFilter from './_components/OrderStatusFilter';
 import { OrderStatus } from '@prisma/client';
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminOrdersPage({
   searchParams,
 }: {

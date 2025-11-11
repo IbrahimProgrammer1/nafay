@@ -3,6 +3,8 @@ import { formatPrice } from '@/../lib/utils';
 import { Users, Package, ShoppingCart, DollarSign, Activity, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 
+export const dynamic = 'force-dynamic';
+
 // Helper function to get stats in a single DB query for efficiency
 async function getDashboardStats() {
   const [totalRevenue, totalOrders, totalCustomers, totalProducts] = await prisma.$transaction([

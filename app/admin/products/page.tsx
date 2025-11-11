@@ -5,6 +5,8 @@ import { PlusCircle, Edit, Trash2 } from 'lucide-react';
 import { formatPrice } from '@/../lib/utils';
 import { deleteProductAction } from '../products/_actions';
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminProductsPage() {
   const products = await prisma.product.findMany({
     orderBy: { createdAt: 'desc' },
