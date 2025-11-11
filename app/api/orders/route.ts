@@ -5,6 +5,8 @@ import { generateOrderNumber } from '@/../lib/utils';
 import { z } from 'zod';
 import { OrderStatus } from '@prisma/client';
 
+export const dynamic = 'force-dynamic';
+
 // Schema for creating an order
 const orderItemSchema = z.object({
   productId: z.string(),

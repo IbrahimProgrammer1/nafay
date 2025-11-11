@@ -3,6 +3,8 @@ import { prisma } from '@/../lib/prisma';
 import { getSession } from '../../../lib/auth.server';
 import { z } from 'zod';
 
+export const dynamic = 'force-dynamic';
+
 const productSchema = z.object({
   name: z.string().min(1),
   brand: z.string().min(1),

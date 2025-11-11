@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { v2 as cloudinary } from 'cloudinary';
 import { getSession } from '../../../lib/auth.server';
 
+export const dynamic = 'force-dynamic';
+
 // Configure Cloudinary with credentials from .env
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
