@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server';
 import { getSession } from '@/../lib/auth.server';
 import { prisma } from '@/../lib/prisma';
 
+// Add this line to mark the route as dynamic
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const session = await getSession();

@@ -4,6 +4,9 @@ import { verifyPassword } from '@/../lib/auth';
 import { createSession } from '@/../lib/auth.server';
 import { z } from 'zod';
 
+// Add this line to mark the route as dynamic
+export const dynamic = 'force-dynamic';
+
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
