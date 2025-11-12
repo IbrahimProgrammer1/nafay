@@ -4,6 +4,7 @@ import { getSession } from '../../../lib/auth.server';
 import { z } from 'zod';
 
 export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 const productSchema = z.object({
   name: z.string().min(1),

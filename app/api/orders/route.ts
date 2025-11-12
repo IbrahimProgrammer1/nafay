@@ -6,8 +6,8 @@ import { z } from 'zod';
 import { OrderStatus } from '@prisma/client';
 
 export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
-// Schema for creating an order
 const orderItemSchema = z.object({
   productId: z.string(),
   quantity: z.number().int().positive(),
@@ -26,7 +26,6 @@ const createOrderSchema = z.object({
   paymentMethod: z.string().min(1),
 });
 
-// GET Handler: Fetches orders based on user role
 export async function GET(request: NextRequest) {
   try {
     const session = await getSession();
@@ -39,13 +38,10 @@ export async function GET(request: NextRequest) {
 
     const whereClause: any = {};
 
-    // If the user is NOT an admin, they can only see their own orders.
     if (session.role !== 'ADMIN') {
       whereClause.userId = session.userId;
     }
-    // Admins can see all orders, so we don't add a userId filter for them.
 
-    // If a status filter is present in the URL, add it to the query.
     if (status) {
       whereClause.status = status;
     }
@@ -60,7 +56,6 @@ export async function GET(request: NextRequest) {
             },
           },
         },
-        // Include user details only if it's an admin request for simplicity, or adjust as needed
         ...(session.role === 'ADMIN' && {
             user: { select: { name: true, email: true } }
         }),
@@ -75,7 +70,6 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST Handler: Creates a new order
 export async function POST(request: NextRequest) {
   try {
     const session = await getSession();
@@ -92,11 +86,10 @@ export async function POST(request: NextRequest) {
     const total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
     const order = await prisma.$transaction(async (tx) => {
-      // Create the order
       const newOrder = await tx.order.create({
         data: {
           ...customerData,
-          userId, // Link to user if logged in
+          userId,
           total,
           orderNumber: generateOrderNumber(),
           items: {
@@ -109,7 +102,6 @@ export async function POST(request: NextRequest) {
         },
       });
 
-      // Update stock for each item
       for (const item of items) {
         const product = await tx.product.findUnique({ where: { id: item.productId } });
         if (!product || product.stock < item.quantity) {

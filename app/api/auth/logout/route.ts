@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import { deleteSession } from '@/../lib/auth.server';
 
-// Add this line to mark the route as dynamic
 export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 export async function POST() {
   try {

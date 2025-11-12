@@ -2,14 +2,13 @@ import { NextResponse } from 'next/server';
 import { getSession } from '@/../lib/auth.server';
 import { prisma } from '@/../lib/prisma';
 
-// Add this line to mark the route as dynamic
 export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 export async function GET() {
   try {
     const session = await getSession();
 
-    // If there's no session or userId, the user is not logged in.
     if (!session?.userId) {
       return NextResponse.json({ user: null });
     }
@@ -25,7 +24,6 @@ export async function GET() {
     });
 
     if (!user) {
-        // The session is invalid (e.g., user was deleted)
         return NextResponse.json({ user: null });
     }
 
